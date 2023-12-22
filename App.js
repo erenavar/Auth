@@ -21,7 +21,7 @@ function NormalStack() {
       }}
     >
       <Stack.Screen
-        name="Login"
+        name="LogIn"
         component={LogInScreen}
         options={{ headerTitle: "Log In" }}
       />
