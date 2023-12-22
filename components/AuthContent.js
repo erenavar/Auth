@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import React from "react";
 import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
@@ -6,6 +6,28 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function AuthContent({ isLogin }) {
   const navigation = useNavigation();
+
+  function submitHandler(credentials) {
+    console.log(credentials);
+    let { confirmEmail, confirmPassword, email, password } = credentials;
+
+    email = email.trim();
+    password = password.trim();
+
+    const emailIsValid = email.includes("@");
+    const passwordIsValid = password.length > 6;
+    const emailAreSame = email === confirmEmail;
+    const passwordsAreSame = password === confirmPassword;
+
+    if (
+      !emailIsValid ||
+      !passwordIsValid ||
+      (!isLogin && (!emailAreSame || !passwordsAreSame))
+    ) {
+      Alert.alert("Oooops", "Please, Control Your Datas");
+      return;
+    }
+  }
 
   function switchScreen() {
     if (isLogin) {
@@ -17,7 +39,7 @@ export default function AuthContent({ isLogin }) {
 
   return (
     <View style={styles.container}>
-      <AuthForm isLogin={isLogin} />
+      <AuthForm isLogin={isLogin} onSubmit={submitHandler} />
       <View>
         <ButtonWhite onPress={switchScreen}>
           {isLogin ? "Create New User" : "Log In"}

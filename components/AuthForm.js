@@ -3,9 +3,20 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
-export default function AuthForm({ isLogin }) {
+export default function AuthForm({ isLogin, onSubmit }) {
   const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setenteredPassword] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
+  const [enteredConfirmEmail, setEnteredConfirmEmail] = useState("");
+
+  const submitHandler = () => {
+    onSubmit({
+      email: enteredEmail,
+      confirmEmail: enteredConfirmEmail,
+      password: enteredPassword,
+      confirmPassword: enteredConfirmPassword,
+    });
+  };
 
   function updateInput(inputType, enteredValue) {
     switch (inputType) {
@@ -14,9 +25,15 @@ export default function AuthForm({ isLogin }) {
         break;
 
       case "password":
-        setenteredPassword(enteredValue);
+        setEnteredPassword(enteredValue);
+        break;
 
-      default:
+      case "confirmEmail":
+        setEnteredConfirmEmail(enteredValue);
+        break;
+
+      case "confirmPassword":
+        setEnteredConfirmPassword(enteredValue);
         break;
     }
   }
@@ -29,14 +46,32 @@ export default function AuthForm({ isLogin }) {
         onTypeValue={updateInput.bind(this, "email")}
         value={enteredEmail}
       />
+      {!isLogin && (
+        <Input
+          label="Confirm E-Mail"
+          keyboardType="email-adress"
+          onTypeValue={updateInput.bind(this, "confirmEmail")}
+          value={enteredConfirmEmail}
+        />
+      )}
       <Input
         label="Password"
         secure
         onTypeValue={updateInput.bind(this, "password")}
-        value={enteredEmail}
+        value={enteredPassword}
       />
+      {!isLogin && (
+        <Input
+          label="Confirm Password"
+          secure
+          onTypeValue={updateInput.bind(this, "confirmPassword")}
+          value={enteredConfirmPassword}
+        />
+      )}
       <View style={styles.buttons}>
-        <Button>{isLogin ? "Log In" : "Sign Up"}</Button>
+        <Button onPress={submitHandler}>
+          {isLogin ? "Log In" : "Sign Up"}
+        </Button>
       </View>
     </View>
   );
