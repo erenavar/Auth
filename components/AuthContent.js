@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert, useState } from "react-native";
 import React from "react";
 import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
@@ -7,8 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 export default function AuthContent({ isLogin }) {
   const navigation = useNavigation();
 
+  const [credentialsInvalid, setCredentialsInvalid] = useState({
+    email: false,
+    password: false,
+    confirmEmail: false,
+    confirmPassword: false,
+  });
+
   function submitHandler(credentials) {
-    console.log(credentials);
     let { confirmEmail, confirmPassword, email, password } = credentials;
 
     email = email.trim();
@@ -25,6 +31,12 @@ export default function AuthContent({ isLogin }) {
       (!isLogin && (!emailAreSame || !passwordsAreSame))
     ) {
       Alert.alert("Oooops", "Please, Control Your Datas");
+      setCredentialsInvalid({
+        email: !emailIsValid,
+        confirmEmail: !emailIsValid || !emailAreSame,
+        password: !passwordIsValid,
+        confirmEmail: !passwordIsValid || !passwordsAreSame,
+      });
       return;
     }
   }
@@ -39,7 +51,11 @@ export default function AuthContent({ isLogin }) {
 
   return (
     <View style={styles.container}>
-      <AuthForm isLogin={isLogin} onSubmit={submitHandler} />
+      <AuthForm
+        credentialsInvalid={credentialsInvalid}
+        isLogin={isLogin}
+        onSubmit={submitHandler}
+      />
       <View>
         <ButtonWhite onPress={switchScreen}>
           {isLogin ? "Create New User" : "Log In"}

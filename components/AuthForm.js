@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
-export default function AuthForm({ isLogin, onSubmit }) {
+export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
   const [enteredConfirmEmail, setEnteredConfirmEmail] = useState("");
+
+
+  
 
   const submitHandler = () => {
     onSubmit({
