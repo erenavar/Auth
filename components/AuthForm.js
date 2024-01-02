@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
-export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
+export default function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
@@ -13,7 +13,7 @@ export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
     confirmEmail: emailsDontMatch,
     password: passwordIsInvalid,
     confirmPassword: passwordsDontMatch,
-  } = credentionlsInvalid;
+  } = credentialsInvalid;
 
   const submitHandler = () => {
     onSubmit({

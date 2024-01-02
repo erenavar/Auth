@@ -1,5 +1,5 @@
-import { StyleSheet, View, Alert, useState } from "react-native";
-import React from "react";
+import { StyleSheet, View, Alert } from "react-native";
+import React, { useState } from "react";
 import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
 import { useNavigation } from "@react-navigation/native";

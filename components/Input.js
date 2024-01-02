@@ -11,9 +11,11 @@ export default function Input({
 }) {
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, isInvalid && styles.labelInvalid]}>
+        {label}
+      </Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input]}
         autoCapitalize="none"
         keyboardType={keyboardType}
         onChangeText={onTypeValue}
@@ -31,6 +33,9 @@ const styles = StyleSheet.create({
   label: {
     color: "white",
     marginBottom: 3,
+  },
+  labelInvalid: {
+    color: "red",
   },
   input: {
     backgroundColor: "pink",
