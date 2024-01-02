@@ -7,6 +7,7 @@ export default function Input({
   onTypeValue,
   value,
   secure,
+  isInvalid,
 }) {
   return (
     <View style={styles.inputContainer}>

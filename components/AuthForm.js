@@ -8,9 +8,12 @@ export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
   const [enteredConfirmEmail, setEnteredConfirmEmail] = useState("");
-
-
-  
+  const {
+    email: emailIsInvalid,
+    confirmEmail: emailsDontMatch,
+    password: passwordIsInvalid,
+    confirmPassword: passwordsDontMatch,
+  } = credentionlsInvalid;
 
   const submitHandler = () => {
     onSubmit({
@@ -48,6 +51,7 @@ export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
         keyboardType="email-adress"
         onTypeValue={updateInput.bind(this, "email")}
         value={enteredEmail}
+        isInvalid={emailIsInvalid}
       />
       {!isLogin && (
         <Input
@@ -55,6 +59,7 @@ export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
           keyboardType="email-adress"
           onTypeValue={updateInput.bind(this, "confirmEmail")}
           value={enteredConfirmEmail}
+          isInvalid={emailsDontMatch}
         />
       )}
       <Input
@@ -62,6 +67,7 @@ export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
         secure
         onTypeValue={updateInput.bind(this, "password")}
         value={enteredPassword}
+        isInvalid={passwordIsInvalid}
       />
       {!isLogin && (
         <Input
@@ -69,6 +75,7 @@ export default function AuthForm({ isLogin, onSubmit, credentionlsInvalid }) {
           secure
           onTypeValue={updateInput.bind(this, "confirmPassword")}
           value={enteredConfirmPassword}
+          isInvalid={passwordsDontMatch}
         />
       )}
       <View style={styles.buttons}>
