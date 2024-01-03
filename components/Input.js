@@ -15,7 +15,7 @@ export default function Input({
         {label}
       </Text>
       <TextInput
-        style={[styles.input]}
+        style={[styles.input, isInvalid && styles.inputInvalid]}
         autoCapitalize="none"
         keyboardType={keyboardType}
         onChangeText={onTypeValue}
@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
   },
   labelInvalid: {
     color: "red",
+  },
+
+  inputInvalid: {
+    backgroundColor: "red",
   },
   input: {
     backgroundColor: "pink",

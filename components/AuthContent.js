@@ -35,7 +35,7 @@ export default function AuthContent({ isLogin }) {
         email: !emailIsValid,
         confirmEmail: !emailIsValid || !emailAreSame,
         password: !passwordIsValid,
-        confirmEmail: !passwordIsValid || !passwordsAreSame,
+        confirmPassword: !passwordIsValid || !passwordsAreSame,
       });
       return;
     }
