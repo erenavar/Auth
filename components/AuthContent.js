@@ -4,7 +4,7 @@ import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
 import { useNavigation } from "@react-navigation/native";
 
-export default function AuthContent({ isLogin }) {
+export default function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
 
   const [credentialsInvalid, setCredentialsInvalid] = useState({
@@ -39,6 +39,7 @@ export default function AuthContent({ isLogin }) {
       });
       return;
     }
+    onAuthenticate({ email, password });
   }
 
   function switchScreen() {
