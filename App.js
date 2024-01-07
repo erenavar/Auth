@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUpScreen from "./screens/SignUpScreen.js";
+import SignUpScreen from "./screens/SignUpScreen";
 import LogInScreen from "./screens/LogInScreen";
 
 const Stack = createNativeStackNavigator();

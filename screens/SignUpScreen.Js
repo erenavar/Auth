@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import AuthContent from "../components/AuthContent";
-import { createUser } from "../components/util/Auth";
+import { createUser } from "../util/Auth";
 
 async function signUpHandler({ email, password }) {
   await createUser(email, password);
