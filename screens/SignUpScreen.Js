@@ -1,16 +1,19 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AuthContent from "../components/AuthContent";
 import { createUser } from "../util/Auth";
 import Loading from "../components/Loading";
+import { AuthContext } from "../store/auth-context";
 
 export default function SignUpScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const authContext = useContext(AuthContext);
 
   async function signUpHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
-      await createUser(email, password);
+      const token = await createUser(email, password);
+      authContext.authenticate(token);
     } catch (error) {
       Alert.alert("User isn't Created", "Please,Confirm Your Knowledges");
     }
