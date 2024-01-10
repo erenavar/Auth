@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import AuthContent from "../components/AuthContent";
 import Loading from "../components/Loading";
@@ -9,7 +9,11 @@ export default function LogInScreen() {
 
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
-    await login(email, password);
+    try {
+      await login(email, password);
+    } catch (error) {
+      Alert.alert("Login Failed", "Please Control Your Knowledges.");
+    }
     setIsAuthenticating(false);
   }
   if (isAuthenticating) {
