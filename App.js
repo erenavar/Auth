@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Pressable, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUpScreen from "./screens/SignUpScreen";
@@ -6,6 +6,7 @@ import LogInScreen from "./screens/LogInScreen";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import HomeScreen from "./screens/HomeScreen";
 import { useContext } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ function NormalStack() {
 }
 
 function AfterAuthenticatedStack() {
+  const authContext = useContext(AuthContext);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -52,7 +54,17 @@ function AfterAuthenticatedStack() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ headerTitle: "Home Screen" }}
+        options={{
+          headerTitle: "Home Page",
+          headerRight: ({ tintColor }) => (
+            <Pressable
+              style={({ pressed }) => pressed && styles.pressed}
+              onPress={authContext.logOut}
+            >
+              <Ionicons name="exit" size={24} color={tintColor} />
+            </Pressable>
+          ),
+        }}
       />
     </Stack.Navigator>
   );
@@ -82,5 +94,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });
